@@ -1,0 +1,24 @@
+header {
+  comment:: "this is a sample policy to generate Juniper SRX filter"
+  comment:: "from zone Untrust to zone DMZ."
+  target:: srx from-zone Untrust to-zone DMZ
+}
+
+term HTTPS {
+  destination-address:: RFC1918
+  protocol:: tcp
+  destination-port:: HTTPS
+  logging:: true
+  action:: accept
+}
+
+term test-icmp {
+  destination-address:: RFC1918
+  protocol:: icmp
+  icmp-type:: echo-request echo-reply
+  action:: accept
+}
+
+term default-deny {
+  action:: deny
+}
