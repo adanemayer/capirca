@@ -88,3 +88,10 @@ NTP_SERVERS = 10.0.0.1/32   # Example NTP server
 
 TACACS_SERVERS = 10.1.0.1/32  # Example tacacs server
                  10.1.0.2/32  # Example tacacs server
+
+BOS-CAL-Users = 172.30.6.0/23
+
+BOS-CAL-Users_Wifi = 172.30.12.0/23
+
+CAL_ZONE = BOS-CAL-Users
+           BOS-CAL-Users_Wifi

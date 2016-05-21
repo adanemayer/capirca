@@ -1,16 +1,4 @@
 security {
-    replace: address-book {
-        global {
-                address RFC1918_0 10.0.0.0/8;
-                address RFC1918_1 172.16.0.0/12;
-                address RFC1918_2 192.168.0.0/16;
-                address-set RFC1918 {
-                    address RFC1918_0;
-                    address RFC1918_1;
-                    address RFC1918_2;
-                }
-        }
-    }
     /*
     $Id:$
     $Date:$
@@ -21,10 +9,10 @@ security {
         this is a sample policy to generate Juniper SRX filter
         from zone Untrust to zone DMZ.
         */
-        from-zone Untrust to-zone DMZ {
+        global {
             policy HTTPS {
                 match {
-                    source-address any;
+                    source-address [ CAL_ZONE ];
                     destination-address [ RFC1918 ];
                     application HTTPS-app;
                 }
@@ -56,17 +44,5 @@ security {
                 }
             }
         }
-    }
-}
-replace: applications {
-    application HTTPS-app1 {
-        term t1 protocol tcp destination-port 443;
-    }
-    application test-icmp-app {
-        term t1 protocol icmp icmp-type 0 inactivity-timeout 60;
-        term t2 protocol icmp icmp-type 8 inactivity-timeout 60;
-    }
-    application-set HTTPS-app {
-        application HTTPS-app1;
     }
 }

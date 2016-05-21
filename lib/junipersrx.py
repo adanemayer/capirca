@@ -764,7 +764,7 @@ class JuniperSRX(aclgenerator.ACLGenerator):
     target.append('security {')
 
     # ADDRESSBOOK
-    target.extend(self._GenerateAddressBook())
+    #target.extend(self._GenerateAddressBook())
 
     # POLICIES
     target.append(self.INDENT * 1 + '/*')
@@ -802,6 +802,6 @@ class JuniperSRX(aclgenerator.ACLGenerator):
     target.append('}')
 
     # APPLICATIONS
-    target.extend(self._GenerateApplications())
+    #target.extend(self._GenerateApplications())
 
     return '\n'.join(target)

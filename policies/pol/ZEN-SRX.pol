@@ -1,10 +1,11 @@
 header {
   comment:: "this is a sample policy to generate Juniper SRX filter"
   comment:: "from zone Untrust to zone DMZ."
-  target:: srx from-zone Untrust to-zone DMZ
+  target:: srx from-zone all to-zone all
 }
 
 term HTTPS {
+  source-address:: CAL_ZONE
   destination-address:: RFC1918
   protocol:: tcp
   destination-port:: HTTPS
