@@ -208,6 +208,7 @@ def CollapseAddrList(addresses):
   Returns:
     list of ipaddr.IPNetwork objects
   """
+  return addresses
   return CollapseAddrListRecursive(
       sorted(addresses, key=ipaddr._BaseNet._get_networks_key))
 

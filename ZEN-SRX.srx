@@ -10,14 +10,27 @@ security {
         from zone Untrust to zone DMZ.
         */
         global {
-            policy HTTPS {
+            policy CAL-to-CRP {
                 match {
                     source-address [ CAL_ZONE ];
-                    destination-address [ RFC1918 ];
-                    application HTTPS-app;
+                    destination-address [ CRP_ZONE ];
+                    application CAL-to-CRP;
                 }
                 then {
                     permit;
+                    log {
+                        session-init;
+                    }
+                }
+            }
+            policy SYS-to-SYS {
+                match {
+                    source-address [ SYS_ZONE ];
+                    destination-address [ SYS_ZONE ];
+                    application SYS-to-SYS;
+                }
+                then {
+                    deny;
                     log {
                         session-init;
                     }
@@ -27,7 +40,7 @@ security {
                 match {
                     source-address any;
                     destination-address [ RFC1918 ];
-                    application test-icmp-app;
+                    application test-icmp;
                 }
                 then {
                     permit;
@@ -44,5 +57,263 @@ security {
                 }
             }
         }
+    }
+}
+replace: applications {
+    application CAL-to-CRP-app1 {
+        term t1 protocol tcp destination-port 25;
+    }
+    application CAL-to-CRP-app2 {
+        term t2 protocol tcp destination-port 80;
+    }
+    application CAL-to-CRP-app3 {
+        term t3 protocol tcp destination-port 110;
+    }
+    application CAL-to-CRP-app4 {
+        term t4 protocol tcp destination-port 143;
+    }
+    application CAL-to-CRP-app5 {
+        term t5 protocol tcp destination-port 443;
+    }
+    application CAL-to-CRP-app6 {
+        term t6 protocol tcp destination-port 445;
+    }
+    application CAL-to-CRP-app7 {
+        term t7 protocol tcp destination-port 465;
+    }
+    application CAL-to-CRP-app8 {
+        term t8 protocol tcp destination-port 993;
+    }
+    application CAL-to-CRP-app9 {
+        term t9 protocol tcp destination-port 995;
+    }
+    application CAL-to-CRP-app10 {
+        term t10 protocol tcp destination-port 2382-2383;
+    }
+    application CAL-to-CRP-app11 {
+        term t11 protocol tcp destination-port 3389;
+    }
+    application CAL-to-CRP-app12 {
+        term t12 protocol tcp destination-port 3391;
+    }
+    application CAL-to-CRP-app13 {
+        term t13 protocol tcp destination-port 3952;
+    }
+    application CAL-to-CRP-app14 {
+        term t14 protocol tcp destination-port 4000;
+    }
+    application CAL-to-CRP-app15 {
+        term t15 protocol tcp destination-port 4011-4999;
+    }
+    application CAL-to-CRP-app16 {
+        term t16 protocol tcp destination-port 8019;
+    }
+    application CAL-to-CRP-app17 {
+        term t17 protocol tcp destination-port 8060;
+    }
+    application CAL-to-CRP-app18 {
+        term t18 protocol tcp destination-port 8080;
+    }
+    application CAL-to-CRP-app19 {
+        term t19 protocol tcp destination-port 8106-8107;
+    }
+    application CAL-to-CRP-app20 {
+        term t20 protocol udp destination-port 25;
+    }
+    application CAL-to-CRP-app21 {
+        term t21 protocol udp destination-port 80;
+    }
+    application CAL-to-CRP-app22 {
+        term t22 protocol udp destination-port 110;
+    }
+    application CAL-to-CRP-app23 {
+        term t23 protocol udp destination-port 143;
+    }
+    application CAL-to-CRP-app24 {
+        term t24 protocol udp destination-port 443;
+    }
+    application CAL-to-CRP-app25 {
+        term t25 protocol udp destination-port 445;
+    }
+    application CAL-to-CRP-app26 {
+        term t26 protocol udp destination-port 465;
+    }
+    application CAL-to-CRP-app27 {
+        term t27 protocol udp destination-port 993;
+    }
+    application CAL-to-CRP-app28 {
+        term t28 protocol udp destination-port 995;
+    }
+    application CAL-to-CRP-app29 {
+        term t29 protocol udp destination-port 2382-2383;
+    }
+    application CAL-to-CRP-app30 {
+        term t30 protocol udp destination-port 3389;
+    }
+    application CAL-to-CRP-app31 {
+        term t31 protocol udp destination-port 3391;
+    }
+    application CAL-to-CRP-app32 {
+        term t32 protocol udp destination-port 3952;
+    }
+    application CAL-to-CRP-app33 {
+        term t33 protocol udp destination-port 4000;
+    }
+    application CAL-to-CRP-app34 {
+        term t34 protocol udp destination-port 4011-4999;
+    }
+    application CAL-to-CRP-app35 {
+        term t35 protocol udp destination-port 8019;
+    }
+    application CAL-to-CRP-app36 {
+        term t36 protocol udp destination-port 8060;
+    }
+    application CAL-to-CRP-app37 {
+        term t37 protocol udp destination-port 8080;
+    }
+    application CAL-to-CRP-app38 {
+        term t38 protocol udp destination-port 8106-8107;
+    }
+    application SYS-to-SYS-app1 {
+        term t1 protocol tcp destination-port 1;
+    }
+    application SYS-to-SYS-app2 {
+        term t2 protocol tcp destination-port 22;
+    }
+    application SYS-to-SYS-app3 {
+        term t3 protocol tcp destination-port 135;
+    }
+    application SYS-to-SYS-app4 {
+        term t4 protocol tcp destination-port 139;
+    }
+    application SYS-to-SYS-app5 {
+        term t5 protocol tcp destination-port 443;
+    }
+    application SYS-to-SYS-app6 {
+        term t6 protocol tcp destination-port 514;
+    }
+    application SYS-to-SYS-app7 {
+        term t7 protocol tcp destination-port 2055;
+    }
+    application SYS-to-SYS-app8 {
+        term t8 protocol tcp destination-port 3389;
+    }
+    application SYS-to-SYS-app9 {
+        term t9 protocol tcp destination-port 5900-5910;
+    }
+    application SYS-to-SYS-app10 {
+        term t10 protocol tcp destination-port 5985-5986;
+    }
+    application SYS-to-SYS-app11 {
+        term t11 protocol tcp destination-port 7262;
+    }
+    application SYS-to-SYS-app12 {
+        term t12 protocol tcp destination-port 49152-65535;
+    }
+    application SYS-to-SYS-app13 {
+        term t13 protocol udp destination-port 1;
+    }
+    application SYS-to-SYS-app14 {
+        term t14 protocol udp destination-port 22;
+    }
+    application SYS-to-SYS-app15 {
+        term t15 protocol udp destination-port 135;
+    }
+    application SYS-to-SYS-app16 {
+        term t16 protocol udp destination-port 139;
+    }
+    application SYS-to-SYS-app17 {
+        term t17 protocol udp destination-port 443;
+    }
+    application SYS-to-SYS-app18 {
+        term t18 protocol udp destination-port 514;
+    }
+    application SYS-to-SYS-app19 {
+        term t19 protocol udp destination-port 2055;
+    }
+    application SYS-to-SYS-app20 {
+        term t20 protocol udp destination-port 3389;
+    }
+    application SYS-to-SYS-app21 {
+        term t21 protocol udp destination-port 5900-5910;
+    }
+    application SYS-to-SYS-app22 {
+        term t22 protocol udp destination-port 5985-5986;
+    }
+    application SYS-to-SYS-app23 {
+        term t23 protocol udp destination-port 7262;
+    }
+    application SYS-to-SYS-app24 {
+        term t24 protocol udp destination-port 49152-65535;
+    }
+    application test-icmp-app {
+        term t1 protocol icmp icmp-type 0 inactivity-timeout 60;
+        term t2 protocol icmp icmp-type 8 inactivity-timeout 60;
+    }
+    application-set CAL-to-CRP-app {
+        application CAL-to-CRP-app1;
+        application CAL-to-CRP-app2;
+        application CAL-to-CRP-app3;
+        application CAL-to-CRP-app4;
+        application CAL-to-CRP-app5;
+        application CAL-to-CRP-app6;
+        application CAL-to-CRP-app7;
+        application CAL-to-CRP-app8;
+        application CAL-to-CRP-app9;
+        application CAL-to-CRP-app10;
+        application CAL-to-CRP-app11;
+        application CAL-to-CRP-app12;
+        application CAL-to-CRP-app13;
+        application CAL-to-CRP-app14;
+        application CAL-to-CRP-app15;
+        application CAL-to-CRP-app16;
+        application CAL-to-CRP-app17;
+        application CAL-to-CRP-app18;
+        application CAL-to-CRP-app19;
+        application CAL-to-CRP-app20;
+        application CAL-to-CRP-app21;
+        application CAL-to-CRP-app22;
+        application CAL-to-CRP-app23;
+        application CAL-to-CRP-app24;
+        application CAL-to-CRP-app25;
+        application CAL-to-CRP-app26;
+        application CAL-to-CRP-app27;
+        application CAL-to-CRP-app28;
+        application CAL-to-CRP-app29;
+        application CAL-to-CRP-app30;
+        application CAL-to-CRP-app31;
+        application CAL-to-CRP-app32;
+        application CAL-to-CRP-app33;
+        application CAL-to-CRP-app34;
+        application CAL-to-CRP-app35;
+        application CAL-to-CRP-app36;
+        application CAL-to-CRP-app37;
+        application CAL-to-CRP-app38;
+    }
+    application-set SYS-to-SYS-app {
+        application SYS-to-SYS-app1;
+        application SYS-to-SYS-app2;
+        application SYS-to-SYS-app3;
+        application SYS-to-SYS-app4;
+        application SYS-to-SYS-app5;
+        application SYS-to-SYS-app6;
+        application SYS-to-SYS-app7;
+        application SYS-to-SYS-app8;
+        application SYS-to-SYS-app9;
+        application SYS-to-SYS-app10;
+        application SYS-to-SYS-app11;
+        application SYS-to-SYS-app12;
+        application SYS-to-SYS-app13;
+        application SYS-to-SYS-app14;
+        application SYS-to-SYS-app15;
+        application SYS-to-SYS-app16;
+        application SYS-to-SYS-app17;
+        application SYS-to-SYS-app18;
+        application SYS-to-SYS-app19;
+        application SYS-to-SYS-app20;
+        application SYS-to-SYS-app21;
+        application SYS-to-SYS-app22;
+        application SYS-to-SYS-app23;
+        application SYS-to-SYS-app24;
     }
 }

@@ -150,7 +150,7 @@ class Term(aclgenerator.Term):
       ret_str.append(JuniperSRX.INDENT * 5 + 'application any;')
     else:
       ret_str.append(JuniperSRX.INDENT * 5 + 'application ' + self.term.name +
-                     '-app;')
+                     ';')
 
     # DSCP MATCH
     if self.term.dscp_match:

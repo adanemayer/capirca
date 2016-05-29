@@ -4,13 +4,22 @@ header {
   target:: srx from-zone all to-zone all
 }
 
-term HTTPS {
+term CAL-to-CRP {
   source-address:: CAL_ZONE
-  destination-address:: RFC1918
-  protocol:: tcp
-  destination-port:: HTTPS
+  destination-address:: CRP_ZONE
+  protocol:: tcp udp
+  destination-port:: CAL-TO-CRP
   logging:: true
   action:: accept
+}
+
+term SYS-to-SYS {
+  source-address:: SYS_ZONE
+  destination-address:: SYS_ZONE
+  protocol:: tcp udp
+  destination-port:: SYS-TO-SYS
+  logging:: true
+  action:: deny
 }
 
 term test-icmp {
